@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Курсовая.Domain.Entity.Stamp>
+
+@{
+    ViewData["Title"] = "Все марки";
+}
+
+<div class="container mt-5">
+    <h2>Список марок</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Страна</th>
+                <th>Код</th>
+                <th>Тематика</th>
+                <th>Дата Публикакции</th>
+                <th>Номинал</th>
+                <th>Цена в каталоге</th>
+                <th>Зубцовка</th>
+                <th>Серия</th>
+                <th>Дата создания</th>
+                <th>Описание</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var stamp in Model)
+            {
+                <tr>
+                    <td>@stamp.Name</td>
+                    <td>@stamp.Country</td>
+                    <td>@stamp.Code</td>
+                    <td>@stamp.Theme</td>
+                    <td>@stamp.ReleaseYear</td>
+                    <td>@stamp.NominalValue</td>
+                    <td>@stamp.CatalogPrice.ToString("C")</td>
+                    <td>@stamp.Perforation</td>
+                    <td>@stamp.Series</td>
+                    <td>@stamp.CreationDate</td>
+                    <td>@stamp.Features</td>
+                    <td>
+                        <a asp-area="" asp-action="Redact" asp-route-id="@stamp.Id" class="btn btn-primary">редактировать</a>
+                    </td>
+                    <td>
+                        <form asp-action="Del" method="post">
+                            <input type="hidden" name="id" value="@stamp.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</div>

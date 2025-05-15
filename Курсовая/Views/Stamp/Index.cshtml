@@ -1,0 +1,104 @@
+﻿@using Курсовая.Domain.Entity
+@model Курсовая.Domain.Entity.Stamp
+@{
+    ViewData["Title"] = "Добавить новую марку";
+}
+
+<div class="container mt-5">
+    <h2>@ViewData["Title"]</h2>
+
+    <form asp-action="Details" method="post" class="mb-5">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input type="hidden" asp-for="Id" />
+
+        <!-- Основные обязательные поля -->
+        <div class="form-group mb-3">
+            <label asp-for="Name" class="form-label">Название марки*</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Country" class="form-label">Страна*</label>
+            <input asp-for="Country" class="form-control" />
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+
+        <!-- Необязательные поля -->
+        <div class="form-group mb-3">
+            <label asp-for="Code" class="form-label">Код марки</label>
+            <input asp-for="Code" class="form-control" placeholder="Если имеется" />
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Theme" class="form-label">Тематика*</label>
+            <input asp-for="Theme" class="form-control" />
+            <span asp-validation-for="Theme" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group mb-3">
+                    <label asp-for="ReleaseYear" class="form-label">Год выпуска*</label>
+                    <input asp-for="ReleaseYear" type="number" class="form-control" />
+                    <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mb-3">
+                    <label asp-for="NominalValue" class="form-label">Номинальная стоимость*</label>
+                    <input asp-for="NominalValue" type="number" step="0.01" class="form-control" />
+                    <span asp-validation-for="NominalValue" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mb-3">
+                    <label asp-for="CatalogPrice" class="form-label">Каталожная цена*</label>
+                    <input asp-for="CatalogPrice" type="number" step="0.01" class="form-control" />
+                    <span asp-validation-for="CatalogPrice" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Дополнительные поля -->
+        <div class="form-group mb-3">
+            <label asp-for="Perforation" class="form-label">Зубцовка</label>
+            <select asp-for="Perforation" asp-items = "Html.GetEnumSelectList<EnumerableZub>()"></select>
+            <span asp-validation-for="Perforation" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Series" class="form-label">Серия</label>
+            <input asp-for="Series" class="form-control" />
+            <span asp-validation-for="Series" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Features" class="form-label">Особенности</label>
+            <textarea asp-for="Features" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Features" class="text-danger"></span>
+        </div>
+
+        
+        <!-- Скрытое поле для даты создания -->
+        <input type="hidden" asp-for="CreationDate" value="@DateTime.Now" />
+       
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Сохранить марку</button>
+            <a asp-action="Get" class="btn btn-secondary">Просмотреть коллекцию</a>
+        </div>
+
+        <div class="mt-2 text-muted">
+            <small>* Поля, обязательные для заполнения</small>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

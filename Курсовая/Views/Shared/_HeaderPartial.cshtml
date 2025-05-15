@@ -1,0 +1,48 @@
+﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Курсовая</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Stamp" asp-action="Index">Stamp</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Collector" asp-action="Index">Collector</a>
+                </li>
+            </ul>
+        </div>
+        @* ..... *@
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                Stamp
+            </button>
+            <ul class="dropdown-menu">
+                <li><a asp-controller="Stamp" asp-action="Index" class="dropdown-item">Создание</a></li>
+                <li><a asp-controller="Stamp" asp-action="Get" class="dropdown-item">Просмотр</a></li>
+            </ul>
+        </div>
+        @* ..... *@
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                Collector
+            </button>
+            <ul class="dropdown-menu">
+                <li><a asp-controller="Collector" asp-action="Index" class="dropdown-item">Создание</a></li>
+                <li><a asp-controller="Collector" asp-action="GetCollectorAll" class="dropdown-item">Просмотр</a></li>
+            </ul>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                Collection
+            </button>
+            <ul class="dropdown-menu">
+                <li><a asp-controller="Collection" asp-action="Index" class="dropdown-item">Создание</a></li>
+                <li><a asp-controller="Collection" asp-action="GetAllColection" class="dropdown-item">Просмотр</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

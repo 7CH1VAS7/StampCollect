@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Курсовая.Domain.Entity.Collector>
+
+<div class="container mt-5">
+    <h2>Список колликционеров</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Полное Имя</th>
+                <th>Страна</th>
+                <th>Имейл</th>
+                <th>Телефон</th>
+                <th>Контакт инфол</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var collector in Model)
+            {
+                <tr>
+                    <td>@collector.FullName</td>
+                    <td>@collector.Country</td>
+                    <td>@collector.Email</td>
+                    <td>@collector.Phone</td>
+                    <td>@collector.ContactInfo</td>
+                    <td>
+                        <a asp-action="Redact" asp-route-id="@collector.Id" class="btn btn-primary">Редактировать </a>
+                    </td>
+                    <td>
+                        <form asp-action="DellCollector" method="post">
+                            <input type="hidden" name="id" value="@collector.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm" >Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</div>

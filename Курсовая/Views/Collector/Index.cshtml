@@ -1,0 +1,36 @@
+﻿@model Курсовая.Domain.Entity.Collector
+
+<div class="container mt-5">
+	<form asp-action="CreateCollector" method="post" class="mb-5">
+		<div class ="form-group mb-3">
+			<label asp-for="FullName" class="form-label">Полное имя</label>
+			<input asp-for="FullName" class="form-control" />
+			<span asp-validation-for="FullName" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="Country" class="form-label">Страна</label>
+			<input asp-for="Country" class="form-control" />
+			<span asp-validation-for="Country" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="ContactInfo" class="form-label">Контактная информация</label>
+			<input asp-for="ContactInfo" class="form-control" />
+			<span asp-validation-for="ContactInfo" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="Email" class="form-label">Email</label>
+			<input asp-for="Email" class="form-control" />
+			<span asp-validation-for="Email" class="text-danger"></span>
+		</div>
+		<div>
+			<label asp-for="Phone" class="form-label">Телефон</label>
+			<input asp-for="Phone" class="form-control" />
+			<span asp-validation-for="Phone" class="text-danger"></span>
+		</div>
+		<div>
+			<button type="submit" class="btn btn-primary">Сохранить</button>
+			<a asp-action="GetCollectorAll" class="btn btn-secondary">Список</a>
+		</div>
+
+	</form>
+</div>

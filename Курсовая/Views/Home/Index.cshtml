@@ -1,0 +1,185 @@
+﻿@{
+    ViewData["Title"] = "Филателия - мир коллекционирования марок";
+}
+
+<!-- Стили и анимации -->
+<style>
+    /* Правильное объявление keyframes */
+    @@keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-15px);
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    .hero-section {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 5rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="80" height="80" x="10" y="10" fill="none" stroke="%23ffffff" stroke-width="2"/></svg>') no-repeat;
+            opacity: 0.3;
+            animation: rotate 30s linear infinite;
+        }
+
+    .stamp-card {
+        transition: all 0.3s ease;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        .stamp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+    .stamp-img {
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .stamp-card:hover .stamp-img {
+        transform: scale(1.05);
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        color: #4a6baf;
+        margin-bottom: 1rem;
+    }
+
+    .floating-stamp {
+        position: absolute;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .btn-collector {
+        background-color: #4a6baf;
+        color: white;
+        padding: 10px 25px;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-collector:hover {
+            background-color: #3a5a9f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+</style>
+
+<!-- Основное содержимое -->
+<div class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">Добро пожаловать в мир филателии</h1>
+        <p class="lead mb-5 animate__animated animate__fadeIn animate__delay-1s">
+            Искусство коллекционирования почтовых марок - это окно в историю, культуру и искусство разных стран
+        </p>
+        <a asp-controller="Stamp" asp-action="Index" class="btn btn-collector animate__animated animate__fadeInUp animate__delay-2s">
+            Посмотреть коллекцию
+        </a>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="stamp-card h-100">
+                <img src="https://avatars.mds.yandex.net/get-entity_search/117753/120394373/S600xU_2x" class="stamp-img w-100" alt="Первая марка">
+                <div class="p-4">
+                    <h3>Первая марка</h3>
+                    <p>"Чёрный пенни" - первая в мире почтовая марка, выпущенная в Великобритании в 1840 году.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="stamp-card h-100">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Gul_tre_skilling_banco.jpg/800px-Gul_tre_skilling_banco.jpg" class="stamp-img w-100" alt="Редкая марка">
+                <div class="p-4">
+                    <h3>Самая дорогая марка</h3>
+                    <p>Шведский "Жёлтый трёхскиллинговик" 1855 года был продан за $2.3 миллиона в 1996 году.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="stamp-card h-100">
+                <img src="https://static.auction.ru/offer_images/2017/02/11/04/big/W/WO7cIKlzYvi/marki_sssr_1972_g_serija_15_letie_kosmicheskoj_ery.jpg" class="stamp-img w-100" alt="Тематическая марка">
+                <div class="p-4">
+                    <h3>Тематические коллекции</h3>
+                    <p>Марки выпускаются с изображениями животных, космоса, спорта и других популярных тем.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Почему люди коллекционируют марки?</h2>
+        <div class="row text-center">
+            <div class="col-md-3 mb-4">
+                <div class="feature-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h4>История</h4>
+                <p>Марки - это свидетели исторических событий и изменений в обществе</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="feature-icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <h4>География</h4>
+                <p>Коллекционирование позволяет изучать страны и культуры мира</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="feature-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h4>Искусство</h4>
+                <p>Марки представляют миниатюрные произведения искусства</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h4>Инвестиции</h4>
+                <p>Редкие марки со временем могут значительно увеличивать свою стоимость</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Подключение Font Awesome для иконок -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

@@ -1,0 +1,39 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
+using Microsoft.EntityFrameworkCore;
+using Курсовая.Domain.Entity;
+using Курсовая.Domain.Repository.Abstract;
+
+namespace Курсовая.Domain.Repository.Concrete
+{
+    public class EFStampRepository : IStampRepository
+    {
+        AppDbContext _context;
+        public EFStampRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task SaveStampAsync(Stamp stamp)
+        {
+            _context.Entry(stamp).State = stamp.Id == default ? EntityState.Added : EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+        public async Task<IEnumerable<Stamp>> GetStampAllAsync()
+        {
+            return await _context.Stamps.ToListAsync();
+        }
+
+        public async Task DelStamp(int id)
+        {
+            _context.Stamps.Entry(new Stamp() { Id = id }).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
+
+        }
+        public async Task<Stamp?> GetStampByIdAsync(int id)
+        {
+            return await _context.Stamps.FirstOrDefaultAsync(x => x.Id == id);
+
+        }
+    }
+}

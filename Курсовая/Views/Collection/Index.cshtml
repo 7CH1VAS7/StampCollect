@@ -1,0 +1,32 @@
+﻿@model Курсовая.Domain.Entity.Collection
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+
+<div>
+    <form asp-action="SaveColectionnn" method="post" class="mb-5">
+        <div>
+            <label asp-for="Name" class="form-label">Название</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="CollectorId" class="form-label">Коллекционер</label>
+            <select asp-for="CollectorId" asp-items="ViewBag.Collector" class="form-control">
+                <option value="">-- Выберите коллекционера --</option>
+            </select>
+            <span asp-validation-for="CollectorId" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="SelectedStampIds" class="form-label">Марки</label>
+            <select name="stampIds" asp-items="ViewBag.Stamps" multiple class="form-control">
+            </select>
+            <small class="text-muted">Удерживайте Ctrl для выбора нескольких марок</small>
+            <span asp-validation-for="SelectedStampIds" class="text-danger"></span>
+        </div>
+        
+        <div>
+            <input asp-for="TotalValue" type="hidden" />
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>

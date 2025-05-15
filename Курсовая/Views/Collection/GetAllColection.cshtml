@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Курсовая.Domain.Entity.Collection>
+
+
+<div class="container mt-5">
+    <h2>Список колликционеров</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Коллектор</th>
+                <th>Марки</th>
+                <th>Телефон</th>
+                <th>Контакт инфол</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var collection in Model)
+            {
+                <tr>
+                    <td>@collection.Name</td>
+                    <td>@collection.Collector?.FullName</td>
+                    <td>
+                        @foreach (var stamp in collection.Stamps)
+                        {
+                            <p>@stamp.Name</p>
+                        }
+                    </td>
+                    <td>@collection.TotalValue</td>
+                    <td>
+                        <a asp-action="Redact" asp-route-id="@collection.Id" class="btn btn-primary">Редактировать </a>
+                    </td>
+                    <td>
+                        <form asp-action="Del" method="post">
+                            <input type="hidden" name="id" value="@collection.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</div>
