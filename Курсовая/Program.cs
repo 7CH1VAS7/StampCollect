@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using Курсовая.Domain;
 using Курсовая.Domain.Repository.Abstract;
 using Курсовая.Domain.Repository.Concrete;
@@ -14,6 +15,7 @@ builder.Services.AddScoped<IStampRepository, EFStampRepository>();
 builder.Services.AddScoped<ICollectorRepository, EFCollectorRepository>();
 builder.Services.AddScoped<ICollectionRepository, EFCollectionRepository>();
 builder.Services.AddScoped<DataManager>();
+
 
 var app = builder.Build();
 

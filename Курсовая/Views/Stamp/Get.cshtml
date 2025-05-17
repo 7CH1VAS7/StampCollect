@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<Курсовая.Domain.Entity.Stamp>
+@using Курсовая.Domain.Entity
+
 
 @{
     ViewData["Title"] = "Все марки";
@@ -40,6 +42,7 @@
                     <td>@stamp.Series</td>
                     <td>@stamp.CreationDate</td>
                     <td>@stamp.Features</td>
+                    <td>@(stamp.IsRare ? "Редкая" : "Не редкая")</td>
                     <td>
                         <a asp-area="" asp-action="Redact" asp-route-id="@stamp.Id" class="btn btn-primary">редактировать</a>
                     </td>

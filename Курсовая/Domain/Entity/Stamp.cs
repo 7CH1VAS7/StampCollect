@@ -1,4 +1,6 @@
-﻿namespace Курсовая.Domain.Entity
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Курсовая.Domain.Entity
 {
     public class Stamp
     {
