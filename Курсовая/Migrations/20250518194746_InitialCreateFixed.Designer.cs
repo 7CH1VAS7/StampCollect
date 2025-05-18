@@ -12,8 +12,8 @@ using Курсовая.Domain;
 namespace Курсовая.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250515192109_test")]
-    partial class test
+    [Migration("20250518194746_InitialCreateFixed")]
+    partial class InitialCreateFixed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,9 +53,6 @@ namespace Курсовая.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.PrimitiveCollection<string>("PurchasePrices")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
