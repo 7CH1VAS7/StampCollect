@@ -1,10 +1,13 @@
 ﻿@model Курсовая.Domain.Entity.Collection
-@{ViewData["Title"] = "AddCollect";}
+@{
+    ViewData["Title"] = "ModCollect";
+}
 
 
 <div>
     <h2>@ViewData["Title"]</h2>
     <form asp-action="SaveColectionnn" method="post" class="mb-5">
+        <input asp-for="Id" type="hidden" />
         <div>
             <label asp-for="Name" class="form-label">Название</label>
             <input asp-for="Name" class="form-control" />
@@ -24,7 +27,7 @@
             <small class="text-muted">Удерживайте Ctrl для выбора нескольких марок</small>
             <span asp-validation-for="SelectedStampIds" class="text-danger"></span>
         </div>
-        
+
         <div>
             <input asp-for="TotalValue" type="hidden" />
         </div>

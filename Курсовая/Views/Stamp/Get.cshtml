@@ -1,13 +1,8 @@
 ﻿@model IEnumerable<Курсовая.Domain.Entity.Stamp>
-@using Курсовая.Domain.Entity
-
-
-@{
-    ViewData["Title"] = "Все марки";
-}
+@{ViewData["Title"] = "Stamps";}
 
 <div class="container mt-5">
-    <h2>!Список марок!</h2>
+    <h2>@ViewData["Title"]</h2>
 
     <table class="table table-striped">
         <thead>
@@ -23,6 +18,8 @@
                 <th>Серия</th>
                 <th>Дата создания</th>
                 <th>Описание</th>
+                <th>Редкость</th>
+                <th>Тираж</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -43,8 +40,9 @@
                     <td>@stamp.CreationDate</td>
                     <td>@stamp.Features</td>
                     <td>@(stamp.IsRare ? "Редкая" : "Не редкая")</td>
+                    <td>@stamp.Circulation</td>
                     <td>
-                        <a asp-area="" asp-action="Redact" asp-route-id="@stamp.Id" class="btn btn-primary">редактировать</a>
+                        <a asp-area="" asp-action="Redact" asp-route-id="@stamp.Id" class="btn btn-primary btn-sm">редактировать</a>
                     </td>
                     <td>
                         <form asp-action="Del" method="post">

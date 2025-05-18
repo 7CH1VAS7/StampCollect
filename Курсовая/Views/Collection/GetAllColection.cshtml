@@ -1,18 +1,16 @@
 ﻿@model IEnumerable<Курсовая.Domain.Entity.Collection>
-
+@{ViewData["Title"] = "Collections";}
 
 <div class="container mt-5">
-    <h2>Список колликционеров</h2>
+    <h2>@ViewData["Title"]</h2>
 
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Имя</th>
-                <th>Коллектор</th>
+                <th>Название</th>
+                <th>Владелец</th>
                 <th>Марки</th>
-                <th>Телефон</th>
-                <th>Контакт инфол</th>
-
+                <th>Ст-ть Марок</th>
             </tr>
         </thead>
         <tbody>
@@ -28,8 +26,9 @@
                         }
                     </td>
                     <td>@collection.TotalValue</td>
+                    
                     <td>
-                        <a asp-action="Redact" asp-route-id="@collection.Id" class="btn btn-primary">Редактировать </a>
+                        <a asp-action="ModCollect" asp-route-id="@collection.Id" class="btn btn-primary btn-sm">Редактировать </a>
                     </td>
                     <td>
                         <form asp-action="Del" method="post">

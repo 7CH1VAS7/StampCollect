@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<Курсовая.Domain.Entity.Collector>
+@{ViewData["Title"] = "Collectors";}
 
 <div class="container mt-5">
-    <h2>Список колликционеров</h2>
+    <h2>@ViewData["Title"]</h2>
 
     <table class="table table-striped">
         <thead>
@@ -11,7 +12,7 @@
                 <th>Имейл</th>
                 <th>Телефон</th>
                 <th>Контакт инфол</th>
-
+                <th>Кол-во ред.марок</th>
             </tr>
         </thead>
         <tbody>
@@ -23,8 +24,9 @@
                     <td>@collector.Email</td>
                     <td>@collector.Phone</td>
                     <td>@collector.ContactInfo</td>
+                    <td>@collector.RareStampsCount</td>
                     <td>
-                        <a asp-action="Redact" asp-route-id="@collector.Id" class="btn btn-primary">Редактировать </a>
+                        <a asp-action="Redact" asp-route-id="@collector.Id" class="btn btn-primary btn-sm">Редактировать </a>
                     </td>
                     <td>
                         <form asp-action="DellCollector" method="post">

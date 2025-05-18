@@ -1,8 +1,6 @@
-﻿@using Курсовая.Domain.Entity
-@model Курсовая.Domain.Entity.Stamp
-@{
-    ViewData["Title"] = "Добавить новую марку";
-}
+﻿@model Курсовая.Domain.Entity.Stamp
+
+@{ViewData["Title"] = "AddStamp";}
 
 <div class="container mt-5">
     <h2>@ViewData["Title"]</h2>
@@ -12,7 +10,6 @@
 
         <input type="hidden" asp-for="Id" />
 
-        <!-- Основные обязательные поля -->
         <div class="form-group mb-3">
             <label asp-for="Name" class="form-label">Название марки*</label>
             <input asp-for="Name" class="form-control" />
@@ -25,7 +22,6 @@
             <span asp-validation-for="Country" class="text-danger"></span>
         </div>
 
-        <!-- Необязательные поля -->
         <div class="form-group mb-3">
             <label asp-for="Code" class="form-label">Код марки</label>
             <input asp-for="Code" class="form-control" placeholder="Если имеется" />
@@ -62,10 +58,9 @@
             </div>
         </div>
 
-        <!-- Дополнительные поля -->
         <div class="form-group mb-3">
             <label asp-for="Perforation" class="form-label">Зубцовка</label>
-            <select asp-for="Perforation" asp-items = "Html.GetEnumSelectList<EnumerableZub>()"></select>
+            <select asp-for="Perforation" asp-items = "new SelectList(EnumerableZub.list)"></select>
             <span asp-validation-for="Perforation" class="text-danger"></span>
         </div>
 
@@ -80,9 +75,13 @@
             <textarea asp-for="Features" class="form-control" rows="3"></textarea>
             <span asp-validation-for="Features" class="text-danger"></span>
         </div>
+        <div class ="form-group mb-3">
+            <label asp-for="Circulation" class="form-label">Тираж</label>
+            <input asp-for="Circulation" class="form-control" />
+            <span asp-validation-for="Circulation" class="text-danger"></span>
+        </div>
 
         
-        <!-- Скрытое поле для даты создания -->
         <input type="hidden" asp-for="CreationDate" value="@DateTime.Now" />
        
 

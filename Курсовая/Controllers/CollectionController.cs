@@ -29,12 +29,6 @@ namespace Курсовая.Controllers
             return View(new Collection());
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SaveColection(Collection collection)
-        {
-            await _dataManager.collectionRepository.SaveCollectionAsync(collection);
-            return RedirectToAction("Index");
-        }
 
         [HttpGet]
         public async Task<IActionResult> GetAllColection()
@@ -64,6 +58,17 @@ namespace Курсовая.Controllers
             await _dataManager.collectionRepository.SaveCollectionAsync(collection);
 
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> ModCollect(int id)
+        {
+            Collection? collect = await _dataManager.collectionRepository.GetCollectionByIdAsync(id);
+            var stamps = _context.Stamps.ToList();
+            var collectors = _context.Collectors.ToList();
+
+            ViewBag.Stamps = new SelectList(stamps, "Id", "Name");
+            ViewBag.Collector = new SelectList(collectors, "Id", "FullName");
+            return View(collect);
         }
     }
 }
