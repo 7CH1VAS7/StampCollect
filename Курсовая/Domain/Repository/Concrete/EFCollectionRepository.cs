@@ -30,6 +30,7 @@ namespace Курсовая.Domain.Repository.Concrete
         {
             return await _context.Collections.Include(c => c.Stamps).Include(c => c.Collector).ToListAsync();
         }
+        
 
 
     }

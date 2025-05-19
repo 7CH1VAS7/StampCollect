@@ -19,10 +19,26 @@
         </div>
         <div>
             <label asp-for="SelectedStampIds" class="form-label">Марки</label>
+            @foreach (var stamp in ViewBag.StampDictionary as Dictionary<int, string>)
+            {
+                
+                    <div>
+                        <input type="checkbox"
+                           name="stampIds"
+                           value="@stamp.Key"
+                           id="stamp_@stamp.Key"
+                           @(Model.SelectedStampIds.Contains(stamp.Key) ? "checked" : "")>
+                    <label for="stamp_@stamp.Key">@stamp.Value</label>
+                </div>
+                
+            }
+
+
+            @* <label asp-for="SelectedStampIds" class="form-label">Марки</label>
             <select name="stampIds" asp-items="ViewBag.Stamps" multiple class="form-control">
             </select>
             <small class="text-muted">Удерживайте Ctrl для выбора нескольких марок</small>
-            <span asp-validation-for="SelectedStampIds" class="text-danger"></span>
+            <span asp-validation-for="SelectedStampIds" class="text-danger"></span> *@
         </div>
         
         <div>

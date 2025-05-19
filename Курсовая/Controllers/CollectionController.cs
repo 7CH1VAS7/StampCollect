@@ -25,6 +25,7 @@ namespace Курсовая.Controllers
 
             ViewBag.Stamps = new SelectList(stamps, "Id", "Name");
             ViewBag.Collector = new SelectList(collectors, "Id", "FullName");
+            ViewBag.StampDictionary = stamps.ToDictionary(s => s.Id, s => s.Name);
 
             return View(new Collection());
         }
@@ -35,9 +36,8 @@ namespace Курсовая.Controllers
         {
             var stamps = _context.Stamps.ToList();
             var collectors = _context.Collectors.ToList();
-            ViewBag.Stamps = new SelectList(stamps, "Id", "Name");
-            ViewBag.Collector = new SelectList(collectors, "Id", "FullName");
-
+           /* ViewBag.Stamps = new SelectList(stamps, "Id", "Name");
+            ViewBag.Collector = new SelectList(collectors, "Id", "FullName");*/
 
             var list = await _dataManager.collectionRepository.GetCollectionAllAsync();
             return View(list);
@@ -52,9 +52,10 @@ namespace Курсовая.Controllers
         public async Task<IActionResult> SaveColectionnn(Collection collection, List<int> stampIds)
         {
             var selectedStamps = await _context.Stamps.Where(s => stampIds.Contains(s.Id)).ToListAsync();
+            
+
 
             collection.Stamps = selectedStamps;
-
             await _dataManager.collectionRepository.SaveCollectionAsync(collection);
 
             return RedirectToAction("Index");
@@ -66,8 +67,9 @@ namespace Курсовая.Controllers
             var stamps = _context.Stamps.ToList();
             var collectors = _context.Collectors.ToList();
 
-            ViewBag.Stamps = new SelectList(stamps, "Id", "Name");
             ViewBag.Collector = new SelectList(collectors, "Id", "FullName");
+            ViewBag.StampDictionary = _context.Stamps.ToDictionary(s => s.Id, s => s.Name);
+            /*ViewBag.StampDictionary = stamps.ToDictionary(s => s.Id, s => s.Name);*/
             return View(collect);
         }
     }
