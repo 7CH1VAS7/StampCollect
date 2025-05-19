@@ -63,13 +63,15 @@ namespace Курсовая.Controllers
         [HttpGet]
         public async Task<IActionResult> ModCollect(int id)
         {
-            Collection? collect = await _dataManager.collectionRepository.GetCollectionByIdAsync(id);
-            var stamps = _context.Stamps.ToList();
-            var collectors = _context.Collectors.ToList();
+            Collection? collect = await _context.Collections
+                .Include(c => c.Stamps) // Важно: загружаем связанные марки
+                .FirstOrDefaultAsync(c => c.Id == id);
 
-            ViewBag.Collector = new SelectList(collectors, "Id", "FullName");
+            if (collect == null) return NotFound();
+
+            ViewBag.Collector = new SelectList(_context.Collectors, "Id", "FullName");
             ViewBag.StampDictionary = _context.Stamps.ToDictionary(s => s.Id, s => s.Name);
-            /*ViewBag.StampDictionary = stamps.ToDictionary(s => s.Id, s => s.Name);*/
+
             return View(collect);
         }
     }

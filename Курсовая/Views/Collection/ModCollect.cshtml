@@ -21,7 +21,7 @@
             <span asp-validation-for="CollectorId" class="text-danger"></span>
         </div>
         <div>
-            <label asp-for="SelectedStampIds" class="form-label">Марки</label>
+            <label class="form-label">Марки</label>
             @foreach (var stamp in ViewBag.StampDictionary as Dictionary<int, string>)
             {
                 <div class="form-check">
@@ -30,7 +30,7 @@
                            name="stampIds"
                            value="@stamp.Key"
                            id="stamp_@stamp.Key"
-                           @(Model.SelectedStampIds != null && Model.SelectedStampIds.Contains(stamp.Key) ? "checked" : "") />
+                           @(Model.Stamps != null && Model.Stamps.Any(s => s.Id == stamp.Key) ? "checked" : "") />
                     <label class="form-check-label" for="stamp_@stamp.Key">
                         @stamp.Value
                     </label>
