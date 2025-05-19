@@ -8,5 +8,6 @@ namespace Курсовая.Domain.Repository.Abstract
         public Task DeleteCollectionAsync(int id);
         public Task<Collection?> GetCollectionByIdAsync(int id);
         public Task <IEnumerable<Collection>> GetCollectionAllAsync();
+        public Task ClearStamp(Collection collection, List<int> stampIds);
     }
 }

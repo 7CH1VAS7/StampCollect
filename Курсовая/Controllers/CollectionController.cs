@@ -48,13 +48,47 @@ namespace Курсовая.Controllers
             await _dataManager.collectionRepository.DeleteCollectionAsync(id);
             return RedirectToAction("GetAllColection");
         }
+
+
+
+
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> ModyfyColectionnn(Collection collection, List<int> stampIds)
+        {
+
+
+            Collection DbCollection = _dataManager.collectionRepository.GetCollectionByIdAsync(collection.Id);
+
+            DbCollection 
+
+            /*var sre = await _dataManager.collectionRepository.GetCollectionByIdAsync(collection.Id);
+            sre.Stamps.Clear();
+            await _dataManager.collectionRepository.SaveCollectionAsync(sre);*/
+
+
+           /* var selectedStamps = await _context.Stamps.Where(s => stampIds.Contains(s.Id)).ToListAsync();
+
+            collection.Stamps = selectedStamps;
+            await _dataManager.collectionRepository.SaveCollectionAsync(collection);
+
+            return RedirectToAction("Index");*/
+        }
+
+
+
+
+
+
+
         [HttpPost]
         public async Task<IActionResult> SaveColectionnn(Collection collection, List<int> stampIds)
         {
+            collection.Stamps.Clear();
             var selectedStamps = await _context.Stamps.Where(s => stampIds.Contains(s.Id)).ToListAsync();
             
-
-
             collection.Stamps = selectedStamps;
             await _dataManager.collectionRepository.SaveCollectionAsync(collection);
 

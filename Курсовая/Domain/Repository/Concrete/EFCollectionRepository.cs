@@ -11,6 +11,22 @@ namespace Курсовая.Domain.Repository.Concrete
         {
             _context = context;
         }
+        
+        public async Task ClearStamp(Collection collection, List<int> stampIds)
+        {
+            var sre = await _context.Collections.AsNoTracking().Include(c => c.Stamps).Include(c => c.Collector).FirstOrDefaultAsync(c => c.Id == collection.Id);
+            sre.Stamps.Clear();
+            _context.Entry(sre).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            var selectedStamps = await _context.Stamps.Where(s => stampIds.Contains(s.Id)).ToListAsync();
+
+            collection.Stamps = selectedStamps;
+            _context.Entry(collection).State = collection.Id == default ? EntityState.Added : EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+        }
+
+
 
         public async Task SaveCollectionAsync(Collection collection)
         {
