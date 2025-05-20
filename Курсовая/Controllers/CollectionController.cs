@@ -58,23 +58,22 @@ namespace Курсовая.Controllers
         [HttpPost]
         public async Task<IActionResult> ModyfyColectionnn(Collection collection, List<int> stampIds)
         {
+            await _dataManager.collectionRepository.UpperStamp(collection, stampIds);
+            return RedirectToAction("Index");
 
-
-            Collection DbCollection = _dataManager.collectionRepository.GetCollectionByIdAsync(collection.Id);
-
-            DbCollection 
+            //Ошибка трекинга
 
             /*var sre = await _dataManager.collectionRepository.GetCollectionByIdAsync(collection.Id);
             sre.Stamps.Clear();
             await _dataManager.collectionRepository.SaveCollectionAsync(sre);*/
 
 
-           /* var selectedStamps = await _context.Stamps.Where(s => stampIds.Contains(s.Id)).ToListAsync();
+            /* var selectedStamps = await _context.Stamps.Where(s => stampIds.Contains(s.Id)).ToListAsync();
 
-            collection.Stamps = selectedStamps;
-            await _dataManager.collectionRepository.SaveCollectionAsync(collection);
+             collection.Stamps = selectedStamps;
+             await _dataManager.collectionRepository.SaveCollectionAsync(collection);
 
-            return RedirectToAction("Index");*/
+             return RedirectToAction("Index");*/
         }
 
 
@@ -97,16 +96,17 @@ namespace Курсовая.Controllers
         [HttpGet]
         public async Task<IActionResult> ModCollect(int id)
         {
-            Collection? collect = await _context.Collections
+            Collection? collection = await _dataManager.collectionRepository.GetCollectionByIdAsync(id);
+            /*Collection? collect = await _context.Collections
                 .Include(c => c.Stamps) // Важно: загружаем связанные марки
-                .FirstOrDefaultAsync(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == id);*/
 
-            if (collect == null) return NotFound();
+            if (collection == null) return NotFound();
 
-            ViewBag.Collector = new SelectList(_context.Collectors, "Id", "FullName");
-            ViewBag.StampDictionary = _context.Stamps.ToDictionary(s => s.Id, s => s.Name);
+            ViewBag.Collector = new SelectList(_context.Collectors, "Id", "FullName"); // Нужно переделать что бы небыло связи с контекстом БД
+            ViewBag.StampDictionary = _context.Stamps.ToDictionary(s => s.Id, s => s.Name); // Нужно переделать что бы небыло связи с контекстом БД
 
-            return View(collect);
+            return View(collection);
         }
     }
 }
