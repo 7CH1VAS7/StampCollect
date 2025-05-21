@@ -18,7 +18,7 @@ namespace Курсовая.Controllers
             _context = context;
 
         }
-
+        [Authorize(Roles = "Admin")]  // Страница создания Коллекции
         public IActionResult Index()
         {
             var stamps = _context.Stamps.ToList();
@@ -32,7 +32,7 @@ namespace Курсовая.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet] // Страница просмотра Коллекций
         public async Task<IActionResult> GetAllColection()
         {
             var stamps = _context.Stamps.ToList();
@@ -43,6 +43,7 @@ namespace Курсовая.Controllers
             var list = await _dataManager.collectionRepository.GetCollectionAllAsync();
             return View(list);
         }
+        [Authorize(Roles = "Admin")] // Запрос на удаление
         [HttpPost]
         public async Task<IActionResult> Del(int id)
         {
@@ -50,40 +51,13 @@ namespace Курсовая.Controllers
             return RedirectToAction("GetAllColection");
         }
 
-
-
-
-
-
-
-        [HttpPost]
+        [HttpPost] // Сохранение отредактированной сущьности коллекции
         public async Task<IActionResult> ModyfyColectionnn(Collection collection, List<int> stampIds)
         {
             await _dataManager.collectionRepository.UpperStamp(collection, stampIds);
             return RedirectToAction("Index");
-
-            //Ошибка трекинга
-
-            /*var sre = await _dataManager.collectionRepository.GetCollectionByIdAsync(collection.Id);
-            sre.Stamps.Clear();
-            await _dataManager.collectionRepository.SaveCollectionAsync(sre);*/
-
-
-            /* var selectedStamps = await _context.Stamps.Where(s => stampIds.Contains(s.Id)).ToListAsync();
-
-             collection.Stamps = selectedStamps;
-             await _dataManager.collectionRepository.SaveCollectionAsync(collection);
-
-             return RedirectToAction("Index");*/
         }
-
-
-
-
-
-
-
-        [HttpPost]
+        [HttpPost] // Первичное сохранение для новой Коллекции
         public async Task<IActionResult> SaveColectionnn(Collection collection, List<int> stampIds)
         {
             collection.Stamps.Clear();
@@ -95,18 +69,11 @@ namespace Курсовая.Controllers
             return RedirectToAction("Index");
         }
         
-        
-
-
-
-        [HttpGet]
+        [HttpGet] //Для загрузки данных в представление для редактирования Коллекции
         public async Task<IActionResult> ModCollect(int id)
         {
             Collection? collection = await _dataManager.collectionRepository.GetCollectionByIdAsync(id);
-            /*Collection? collect = await _context.Collections
-                .Include(c => c.Stamps) // Важно: загружаем связанные марки
-                .FirstOrDefaultAsync(c => c.Id == id);*/
-
+            
             if (collection == null) return NotFound();
 
             ViewBag.Collector = new SelectList(_context.Collectors, "Id", "FullName"); // Нужно переделать что бы небыло связи с контекстом БД

@@ -5,44 +5,52 @@
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+
         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
             <ul class="navbar-nav flex-grow-1">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Stamp" asp-action="Index">Stamp</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Stamp" asp-action="Get">Stamp</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Collector" asp-action="Index">Collector</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Collector" asp-action="GetCollectorAll">Collector</a>
                 </li>
             </ul>
         </div>
-        @* ..... *@
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                Stamp
-            </button>
-            <ul class="dropdown-menu">
-                <li><a asp-controller="Stamp" asp-action="Index" class="dropdown-item">Создание</a></li>
-                <li><a asp-controller="Stamp" asp-action="Get" class="dropdown-item">Просмотр</a></li>
-            </ul>
-        </div>
-        @* ..... *@
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                Collector
-            </button>
-            <ul class="dropdown-menu">
-                <li><a asp-controller="Collector" asp-action="Index" class="dropdown-item">Создание</a></li>
-                <li><a asp-controller="Collector" asp-action="GetCollectorAll" class="dropdown-item">Просмотр</a></li>
-            </ul>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                Collection
-            </button>
-            <ul class="dropdown-menu">
-                <li><a asp-controller="Collection" asp-action="Index" class="dropdown-item">Создание</a></li>
-                <li><a asp-controller="Collection" asp-action="GetAllColection" class="dropdown-item">Просмотр</a></li>
-            </ul>
-        </div>
+
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Stamp
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a asp-controller="Stamp" asp-action="Index" class="dropdown-item">Создание</a></li>
+                    <li><a asp-controller="Stamp" asp-action="Get" class="dropdown-item">Просмотр</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Collector
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a asp-controller="Collector" asp-action="Index" class="dropdown-item">Создание</a></li>
+                    <li><a asp-controller="Collector" asp-action="GetCollectorAll" class="dropdown-item">Просмотр</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Collection
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a asp-controller="Collection" asp-action="Index" class="dropdown-item">Создание</a></li>
+                    <li><a asp-controller="Collection" asp-action="GetAllColection" class="dropdown-item">Просмотр</a></li>
+                </ul>
+            </div>
+        }
+        <a asp-action="Index" asp-controller="Account" class="profile-icon" title="Только Админ">
+            <i class="fas fa-user-circle fa-lg"></i>
+        </a>
     </div>
 </nav>

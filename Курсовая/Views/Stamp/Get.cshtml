@@ -41,15 +41,18 @@
                     <td>@stamp.Features</td>
                     <td>@(stamp.IsRare ? "Редкая" : "Не редкая")</td>
                     <td>@stamp.Circulation</td>
-                    <td>
-                        <a asp-area="" asp-action="Redact" asp-route-id="@stamp.Id" class="btn btn-primary btn-sm">редактировать</a>
-                    </td>
-                    <td>
-                        <form asp-action="Del" method="post">
-                            <input type="hidden" name="id" value="@stamp.Id" />
-                            <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
-                        </form>
-                    </td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            <a asp-area="" asp-action="Redact" asp-route-id="@stamp.Id"  class="btn btn-primary btn-sm">редактировать</a>
+                        </td>
+                        <td>
+                            <form asp-action="Del" method="post">
+                                <input type="hidden" name="id" value="@stamp.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                            </form>
+                        </td>
+                    }
                 </tr>
             }
         </tbody>
@@ -57,3 +60,5 @@
 
     <a asp-action="Index" class="btn btn-secondary">Назад</a>
 </div>
+
+

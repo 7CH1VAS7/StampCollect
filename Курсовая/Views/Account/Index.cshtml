@@ -1,5 +1,4 @@
-﻿@using Курсовая.Models
-@model LoginViewModel
+﻿@model LoginViewModel
 
 <h2>Вход в систему</h2>
 
@@ -20,10 +19,13 @@
 
     <button type="submit" class="btn btn-primary">Войти</button>
 </form>
-
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <a asp-action="Logout" class="btn btn-danger btn-sm">Выйти</a>
+}
 @if (!ViewData.ModelState.IsValid && ViewData.ModelState[string.Empty]?.Errors.Any() == true)
 {
     <div class="alert alert-danger">
-        @ViewData.ModelState[string.Empty].Errors.First().ErrorMessage
+        @ViewData.ModelState[string.Empty]?.Errors.First().ErrorMessage
     </div>
 }
