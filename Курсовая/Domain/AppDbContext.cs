@@ -16,5 +16,14 @@ namespace Курсовая.Domain
         public DbSet<Collector> Collectors { get; set; }
         public DbSet<Collection> Collections { get; set; }
 
+
+
+
+
+
     }
+
+
+
+
 }

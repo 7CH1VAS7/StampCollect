@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Курсовая.Domain;
@@ -93,6 +94,11 @@ namespace Курсовая.Controllers
 
             return RedirectToAction("Index");
         }
+        
+        
+
+
+
         [HttpGet]
         public async Task<IActionResult> ModCollect(int id)
         {

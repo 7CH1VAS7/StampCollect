@@ -1,10 +1,16 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Headers;
 using System.Text.Json.Serialization;
 using Курсовая.Domain;
 using Курсовая.Domain.Repository.Abstract;
 using Курсовая.Domain.Repository.Concrete;
+using Курсовая.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -15,6 +21,20 @@ builder.Services.AddScoped<IStampRepository, EFStampRepository>();
 builder.Services.AddScoped<ICollectorRepository, EFCollectorRepository>();
 builder.Services.AddScoped<ICollectionRepository, EFCollectionRepository>();
 builder.Services.AddScoped<DataManager>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "TestCookie"; // Имя cookie
+        options.LoginPath = "/Account/Index";  // Путь к странице входа
+        options.AccessDeniedPath = "/Account/Error"; // Путь при отказе в доступе
+        options.ExpireTimeSpan = TimeSpan.FromDays(30); // Время жизни cookie
+        options.SlidingExpiration = true; // Обновлять срок при активности
+    });
+
+// Добавляем сервисы авторизации
+builder.Services.AddAuthorization();
+
 
 
 var app = builder.Build();
@@ -32,6 +52,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); // Должно быть ДО UseAuthorization
 app.UseAuthorization();
 
 app.MapControllerRoute( 
