@@ -15,10 +15,10 @@ namespace Курсовая.CoreLogin
             _identity = identity;
         }
 
-        public async Task<IAsyncResult> NewAdmin(AdminModel model)
+        /*public async Task<IAsyncResult> NewAdmin(AdminModel model)
         {
             
-        }
+        }*/
 
     }
 }
