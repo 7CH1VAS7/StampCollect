@@ -26,7 +26,9 @@ namespace Курсовая.Domain.Repository.Concrete
 
         public async Task<IEnumerable<Collector>> GetCollectorAllAsync()
         {
-            return await _context.Collectors.ToListAsync();
+            var collectors = await _context.Collectors.Include(c => c.Collections).ThenInclude(col => col.Stamps.Where(s => s.CatalogPrice > 1000)).ToListAsync();
+
+            return collectors;
 
         }
 

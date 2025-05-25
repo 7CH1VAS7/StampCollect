@@ -20,6 +20,7 @@
                 <th>Описание</th>
                 <th>Редкость</th>
                 <th>Тираж</th>
+                <th>Покупка</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -41,6 +42,7 @@
                     <td>@stamp.Features</td>
                     <td>@(stamp.IsRare ? "Редкая" : "Не редкая")</td>
                     <td>@stamp.Circulation</td>
+                    <td>@stamp.LastBy</td>
                     @if (User.IsInRole("Admin"))
                     {
                         <td>

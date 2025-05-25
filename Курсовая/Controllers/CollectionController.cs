@@ -54,6 +54,12 @@ namespace Курсовая.Controllers
         [HttpPost] // Сохранение отредактированной сущьности коллекции
         public async Task<IActionResult> ModyfyColectionnn(Collection collection, List<int> stampIds)
         {
+            collection.Stamps.Clear();
+            var selectedStamps = await _context.Stamps.Where(s => stampIds.Contains(s.Id)).ToListAsync();
+            foreach (var stamp in selectedStamps)
+            {
+                stamp.LastBy = DateTime.Now;
+            }
             await _dataManager.collectionRepository.UpperStamp(collection, stampIds);
             return RedirectToAction("Index");
         }
@@ -62,7 +68,11 @@ namespace Курсовая.Controllers
         {
             collection.Stamps.Clear();
             var selectedStamps = await _context.Stamps.Where(s => stampIds.Contains(s.Id)).ToListAsync();
-            
+
+            foreach (var stamp in selectedStamps) 
+            {
+                stamp.LastBy = DateTime.Now;
+            }
             collection.Stamps = selectedStamps;
             await _dataManager.collectionRepository.SaveCollectionAsync(collection);
 
