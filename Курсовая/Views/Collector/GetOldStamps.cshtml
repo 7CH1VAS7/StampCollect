@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Курсовая.Domain.Entity.Collector>
+
+@{
+    ViewData["Title"] = "Коллекционеры с марками старше 10 лет";
+    var currentYear = DateTime.Now.Year;
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    <div class="alert alert-info">
+        Показаны коллекционеры, имеющие хотя бы одну марку, выпущенную до @(currentYear - 10) года
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>ФИО</th>
+                <th>Страна</th>
+                <th>Всего марок</th>
+                <th>Старых марок (>10 лет)</th>
+                <th>Самая старая марка</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var collector in Model)
+            {
+                var allStamps = collector.Collections.SelectMany(c => c.Stamps).ToList();
+                var oldStamps = allStamps.Where(s => s.ReleaseYear < currentYear - 10).ToList();
+                var oldestStamp = oldStamps.OrderBy(s => s.ReleaseYear).FirstOrDefault();
+
+                <tr>
+                    <td>@collector.FullName</td>
+                    <td>@collector.Country</td>
+                    <td>@allStamps.Count</td>
+                    <td>@oldStamps.Count</td>
+                    <td>
+                        @if (oldestStamp != null)
+                        {
+                            <span>@oldestStamp.Name (@oldestStamp.ReleaseYear г.)</span>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Нет данных</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

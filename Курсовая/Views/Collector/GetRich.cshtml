@@ -1,0 +1,71 @@
+﻿@model Курсовая.Models.TransModel
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1 class="h3 mb-0">
+                            <i class="fas fa-crown me-2"></i>Топ-коллекционер
+                        </h1>
+                        <span class="badge bg-warning text-dark fs-6">
+                            <i class="fas fa-coins me-1"></i> Самая дорогая марка
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 border-end">
+                            <div class="text-center py-4">
+                                <div class="avatar-lg mx-auto mb-3">
+                                    <div class="avatar-title bg-light rounded-circle text-primary fs-1">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                </div>
+                                <h2 class="h4">@Model.Collector.FullName</h2>
+                                <div class="mt-3">
+                                    <span class="badge bg-info text-dark me-2">
+                                        <i class="fas fa-envelope me-1"></i> @Model.Collector.Email
+                                    </span>
+                                    <span class="badge bg-secondary">
+                                        <i class="fas fa-globe me-1"></i> @Model.Collector.Country
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="text-center py-4">
+                                <div class="stamp-preview mx-auto mb-3">
+                                    <div class="stamp-placeholder bg-light rounded">
+                                        <i class="fas fa-stamp text-danger fs-1"></i>
+                                    </div>
+                                </div>
+                                <h3 class="h5">@Model.Stamp.Name</h3>
+                                <div class="display-5 text-danger fw-bold my-2">
+                                    @Model.Stamp.CatalogPrice.ToString("C")
+                                </div>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <span class="badge bg-dark">
+                                        <i class="fas fa-calendar me-1"></i> @Model.Stamp.ReleaseYear
+                                    </span>
+                                    <span class="badge bg-success">
+                                        <i class="fas fa-flag me-1"></i> @Model.Stamp.Country
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-light">
+                    <div class="text-center text-muted small">
+                        <i class="fas fa-info-circle me-1"></i> Данные актуальны на @DateTime.Now.ToString("dd.MM.yyyy")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

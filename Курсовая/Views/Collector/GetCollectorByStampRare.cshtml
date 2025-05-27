@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Курсовая.Domain.Entity.Collector>
+
+
+<div class="container py-4">
+    <h1 class="text-center mb-4">Коллекционеры с редкими марками</h1>
+
+    <div class="row g-4">
+        @foreach (var collector in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="h5 mb-0">
+                            <i class="fas fa-user me-2"></i>@collector.FullName
+                        </h3>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-info text-dark">
+                                <i class="fas fa-envelope me-1"></i> @collector.Email
+                            </span>
+                            <span class="badge bg-secondary">
+                                <i class="fas fa-globe me-1"></i> @collector.Country
+                            </span>
+                        </div>
+
+                        @if (collector.Collections.Any())
+                        {
+                            <div class="accordion" id="accordion-@collector.Id">
+                                @foreach (var collection in collector.Collections)
+                                {
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading-@collection.Id">
+                                            <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse-@collection.Id"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapse-@collection.Id">
+                                                @collection.Name
+                                                <span class="badge bg-primary rounded-pill ms-2">
+                                                    @collection.Stamps.Count
+                                                </span>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse-@collection.Id" class="accordion-collapse collapse"
+                                             aria-labelledby="heading-@collection.Id"
+                                             data-bs-parent="#accordion-@collector.Id">
+                                            <div class="accordion-body">
+                                                @if (collection.Stamps.Any())
+                                                {
+                                                    <div class="list-group">
+                                                        @foreach (var stamp in collection.Stamps)
+                                                        {
+                                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <div>
+                                                                    <h6 class="mb-1">@stamp.Name</h6>
+                                                                    <small class="text-muted">
+                                                                        @stamp.Country, @stamp.ReleaseYear
+                                                                    </small>
+                                                                </div>
+                                                                <span class="badge @(stamp.IsRare ? "bg-danger" : "bg-success")">
+                                                                    @stamp.CatalogPrice.ToString("C")
+                                                                </span>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="alert alert-warning mb-0">Нет марок в коллекции</div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning mb-0">Нет коллекций</div>
+                        }
+                    </div>
+
+                    <div class="card-footer bg-light">
+                        <small class="text-muted">
+                            Всего редких марок: <span class="badge bg-danger">@collector.RareStampsCount</span>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -48,6 +48,5 @@ namespace Курсовая.Controllers
             return View(stamp);
         }
 
-
     }
 }

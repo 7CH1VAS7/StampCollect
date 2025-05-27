@@ -34,7 +34,7 @@ namespace Курсовая.Controllers
             return View();
         }
         [Authorize(Roles = "Admin")]
-        [HttpPost]
+        [HttpDelete]  ///////////////////////////////////////////////////////////////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  [HttpPost]
         public async Task<IActionResult> DellCollector(int id)
         {
             await _dataManager.collectorRepository.DelCollectorAsync(id);
@@ -48,6 +48,38 @@ namespace Курсовая.Controllers
             return View(collector);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetCollectorByStampRare()
+        {
+            var a = await _dataManager.collectorRepository.GetCollectorByStampRare();
+            return View(a);
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetRich()
+        {
+            var Model = await _dataManager.collectorRepository.GetRichCollector();
+            return View(Model);
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> BigRare()
+        {
+            var a = await _dataManager.collectorRepository.GetBigRare();
+            return View(a);
+        }
+        [HttpGet]
+        public async Task<IActionResult> TopCollectors()
+        {
+            var collectors = await _dataManager.collectorRepository.SortColl();
+            return View(collectors);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetOldStamps()
+        {
+            var collectors = await _dataManager.collectorRepository.OldStamps();
+            return View(collectors);
+        }
 
     }
 }

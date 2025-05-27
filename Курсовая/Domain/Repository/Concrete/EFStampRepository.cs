@@ -19,7 +19,8 @@ namespace Курсовая.Domain.Repository.Concrete
         }
         public async Task<IEnumerable<Stamp>> GetStampAllAsync()
         {
-            return await _context.Stamps.ToListAsync();
+            var a = await _context.Stamps.Include(a=>a.Collections).ThenInclude(a=>a.Collector).ToListAsync();
+            return a;
         }
 
         public async Task DelStamp(int id)

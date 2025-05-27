@@ -91,5 +91,23 @@ namespace Курсовая.Controllers
 
             return View(collection);
         }
+
+
+
+        /*[HttpGet]
+        public async Task<IActionResult> ColCol()
+        {
+            var setcollektors = await _dataManager.collectorRepository.GetCollectorAllAsync();
+            return View(setcollektors);
+        }*/
+
+
+
+
+
+
+
+
+
     }
 }

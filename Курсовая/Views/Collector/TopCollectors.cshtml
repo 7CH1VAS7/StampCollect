@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Курсовая.Domain.Entity.Collector>
+
+@{
+    ViewData["Title"] = "Коллекционеры по стоимости коллекций";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>ФИО</th>
+                <th>Страна</th>
+                <th>Коллекций</th>
+                <th>Редких марок</th>
+                <th>Общая стоимость</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var collector in Model)
+            {
+                var totalValue = collector.Collections
+                .SelectMany(c => c.Stamps)
+                .Sum(s => s.CatalogPrice);
+
+                <tr>
+                    <td>@collector.FullName</td>
+                    <td>@collector.Country</td>
+                    <td>@collector.Collections.Count</td>
+                    <td>@collector.RareStampsCount</td>
+                    <td>@totalValue.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
