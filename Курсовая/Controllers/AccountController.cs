@@ -10,7 +10,7 @@ namespace Курсовая.Controllers
     public class AccountController : Controller
     {
         private const string _adminLogin = "admin";
-        private const string _adminPassword = "admin123"; // В реальном проекте храните хеш пароля!
+        private const string _adminPassword = "admin123"; 
 
         [HttpGet]
         public IActionResult Index()
@@ -25,14 +25,14 @@ namespace Курсовая.Controllers
             if (!ModelState.IsValid)
                 return View("Index", model);
 
-            // Проверка логина/пароля (в реальном проекте - проверка в БД)
+            
             if (model.Login == _adminLogin && model.Password == _adminPassword)
             {
                 // Создаем claims (утверждения) для пользователя
                 var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, model.Login),
-                new Claim(ClaimTypes.Role, "Admin") // Добавляем роль
+                new Claim(ClaimTypes.Role, "Admin") 
             };
 
                 // Создаем объект ClaimsIdentity
@@ -46,7 +46,7 @@ namespace Курсовая.Controllers
                     new ClaimsPrincipal(claimsIdentity),
                     new AuthenticationProperties
                     {
-                        IsPersistent = true, // "Запомнить меня"
+                        IsPersistent = true,
                         ExpiresUtc = DateTimeOffset.UtcNow.AddDays(30)
                     });
 
@@ -57,7 +57,7 @@ namespace Курсовая.Controllers
             return View("Index", model);
         }
 
-        [Authorize] // Только для авторизованных
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
